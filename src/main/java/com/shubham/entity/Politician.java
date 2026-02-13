@@ -12,8 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Politician 
-{
+public class Politician {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id ;

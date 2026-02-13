@@ -8,4 +8,5 @@ import com.shubham.entity.Politician;
 @Repository
 public interface PoliticianRepository extends JpaRepository<Politician, Integer> {
 
+
 }
