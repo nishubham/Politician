@@ -1,12 +1,12 @@
 package com.shubham.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.shubham.entity.Politician;
+import com.shubham.exception.PoliticianResourseNotFound;
 import com.shubham.repository.PoliticianRepository;
 
 @Service
@@ -23,7 +23,7 @@ public class PoliticianService {
 	
 	public Politician findById(Integer id)
 	{
-	    return repo.findById(id).orElse(null);
+	    return repo.findById(id).orElseThrow(() -> new PoliticianResourseNotFound("Id is not found !!!"));
 	}
 	
 	public List<Politician> findAll(){
@@ -32,31 +32,22 @@ public class PoliticianService {
 	
 	public Politician update(Politician poli)
 	{
-	    Politician existing = repo.findById(poli.getId()).orElse(null);
+	    Politician existing = repo.findById(poli.getId()).orElseThrow(() -> new PoliticianResourseNotFound("Id is not found !!!"));
 
-	    if (existing != null) 
-	    {
-	        return repo.save(poli);
-	    }
-
-	    return null;
+	    return repo.save(existing);
 	}
 	
 	public String deleteById(Integer id)
 	{
-	    Politician politician = repo.findById(id).orElse(null);
+	    Politician politician = repo.findById(id).orElseThrow(() -> new PoliticianResourseNotFound("Id is not found !!!"));
 
-	    if (politician != null) 
-	    {
-	        repo.deleteById(id);
-	        return "Politician deleted successfully";
-	    }
-
-	    return "Politician not found";
+	    repo.delete(politician);
+	    return politician.getName()+"is deleted Successfully !!!!";
 	}
 	
-	public void deleteAll(Politician poli)
+	public String deleteAll()
 	{
 		repo.deleteAll();
+		return "Deleted all Politician Data";
 	}
 }
