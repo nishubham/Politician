@@ -20,7 +20,6 @@ public class PoliticianService {
 		return save.getName()+" is save";
 	}
 	
-	
 	public List<Politician> findAll(){
 		return repo.findAll();
 	}
