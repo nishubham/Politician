@@ -22,7 +22,7 @@ public class PoliticianControler {
 	private PoliticianService service;
 	
 	@PostMapping("/add")
-	public ResponseEntity<String> add(@RequestBody Politician poli){
+	public ResponseEntity<String>add(@RequestBody Politician poli){
 		String msg=service.add(poli);
 		return new ResponseEntity<>(msg,HttpStatus.CREATED);
 	}
